@@ -1,0 +1,27 @@
+local pins = workspace:WaitForChild("Pins")
+local funcs = require(game.ReplicatedStorage.Functions)
+local gui = script.Parent.Parent:WaitForChild("PlayerGui"):WaitForChild("main"):WaitForChild("PinCount")
+local debris = game:GetService("Debris")
+pins.ChildAdded:Connect(function(v)
+	local click = v:WaitForChild("ClickDetector")
+	click.RightMouseClick:Connect(function()
+		click:Destroy()
+		game:GetService("TweenService"):Create(v, TweenInfo.new(1, Enum.EasingStyle.Linear), {Transparency = 1}):Play()
+		game:GetService("TweenService"):Create(v.bb.Label, TweenInfo.new(1, Enum.EasingStyle.Linear), {TextTransparency = 1, TextStrokeTransparency = 1}):Play()
+		task.spawn(function()
+			local t = tick()
+			local starting = v.Position
+			local x,z = math.sin(math.rad(math.random(-90,90)))*10, math.cos(math.rad(math.random(0,180)))*10  
+			print(x-starting.X,z-starting.Z)
+			while tick()-t < 1 and task.wait() do --same as runservice.heartbeat:Wait()
+				local mult = tick()-t
+				local yval = mult < 0.5 and math.sin(math.rad(mult*2*90)) or math.sin(math.rad((1-mult)*2*90))
+				v.Position = starting + Vector3.new(x*mult, yval*5, z*mult)
+			end
+		end)
+		debris:AddItem(v, 1)
+		local cur, max = funcs.PinCount()
+		funcs.SetPins(cur+1, max)
+		gui.Text = string.format("%d / %d", funcs.PinCount())
+	end)
+end)
