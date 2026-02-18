@@ -112,6 +112,59 @@ defaultpartshapes.Smiley = function(self, degree, ...)
 	local degree2 = cache.root and -cache.root.Orientation.Y*torad or 0
 	return Vector3.new(x * cos(degree2), y, x * sin(degree2)) * self.Radius
 end
+<<<<<<< HEAD
+=======
+defaultpartshapes.DEquals8 = function(self, degree, ...) 
+	local args = {...}
+	local cache = args[3]
+	local offsetperc = args[1]/args[2]
+	degree = (degree * torad +(offsetperc * tau)) % tau
+	
+	local denominator = 1/(4.92228456446 * self.Radius) --4.9 is the r=1 perimeter of the shape
+	local percentage = degree/tau
+	--piecewise lol
+	--the values are ratios of the "piece's" perimeter to the total perimeter
+	local x,y
+	if percentage < 0.235577115725 then
+		degree = degree/0.235577115725
+		
+		x = 2 * cos(degree)/3 - 7/6
+		y = 2 * sin(degree)/3
+	elseif percentage < 0.404296796737 then
+		local last = 0.235577115725 * tau
+		degree = (degree - last)/(0.404296796737*tau - last) * tau
+		
+		x = -0.5
+		y = degree/2
+	elseif percentage < 0.507361784866 then
+		local last = 0.404296796737 * tau
+		degree = (degree - last)/(0.507361784866*tau - last) * tau
+		
+		x = -cos(degree/2)/2
+		y = abs((2 * sin(degree/2))/3) + 3
+	elseif percentage < 0.676081465878 then
+		local last = 0.507361784866 * tau
+		degree = (degree - last)/(0.676081465878*tau - last) * tau
+		
+		x = 0.5
+		y = 3 - degree/2
+	elseif percentage < 0.911658581603 then
+		local last = 0.676081465878 * tau
+		degree = (degree - last)/(0.911658581603*tau - last) * tau
+		
+		x = -2 * cos(degree)/3 + 7/6
+		y = 2 * sin(degree)/3
+	else
+		local last = 0.911658581603 * tau
+		degree = (degree - last)/(tau-last) * tau
+
+		x = cos(degree/2)/2
+		y = -sin(degree)/2
+	end
+	local degree2 = cache.root and -cache.root.Orientation.Y*torad or 0
+	return Vector3.new(x*cos(degree2), y, x*sin(degree2)) * self.Radius * 3/11 --scales to r=1 (i made the shape at an 11/3 factor in desmos)
+end
+>>>>>>> f98e5877aa1077bd464e9f334221ebd3cf1696ba
 defaultpartshapes.Orbit = function(self, degree, ...) 
 	local args = {...}
 	local cache = args[3]
