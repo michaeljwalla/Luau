@@ -5,6 +5,9 @@ For Roblox Engine (Luau).
 Scripts with module dependencies have been modified to better-format for Github, and may need to be modified.
 Most non-specific modules will run without any modification.
 
+## /Modules
+General directory for code used as modules in other scripts. These can be- and have been used by others!
+
 ## /Studio
 Source for different algorithm & engine showcases. Some files may be duplicated within Luau/Modules.
 All experiences can be played and downloaded (see /Studio's readme).
@@ -15,6 +18,3 @@ Tens of thousands of lines of dedication from extensive reverse-engineering of e
 Composed of game-specific modules* and a 2024 passion project. Unfortunately, it is dificult to utilize many of these without revising platform-specific functions.
 
 *some files may be duplicated into Luau/Modules.
-
-## /Modules
-General directory for code used as modules in other scripts. These can be- and have been used by others!
