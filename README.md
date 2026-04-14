@@ -5,8 +5,8 @@ Most designated for Roblox engine (Luau), however minor revisions can be made in
 Scripts with module dependencies have been modified to better-format for Github, and may need to be modified.
 Most non-specific modules will run without any modification.
 
-## [Modules](/Modules/)
-General directory for code used as modules in other scripts. These can be- and have been used by others!
+## Modules
+moved to https://github.com/michaeljwalla/Lua-Modules
 
 ## [Studio](/Studio/)
 Source for different algorithm & engine showcases. Some files may be duplicated within Luau/Modules.
